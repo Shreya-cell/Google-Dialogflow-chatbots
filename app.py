@@ -10,23 +10,23 @@ app = Flask(__name__)
 
 
 
-# geting and sending response to dialogflow
-@app.route('/webhook', methods=['POST'])
-@cross_origin()
-def webhook():
+# # geting and sending response to dialogflow
+# @app.route('/webhook', methods=['POST'])
+# @cross_origin()
+# def webhook():
 
-    req = request.get_json(silent=True, force=True)
+#     req = request.get_json(silent=True, force=True)
 
-    #print("Request:")
-    #print(json.dumps(req, indent=4))
+#     #print("Request:")
+#     #print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+#     res = processRequest(req)
 
-    res = json.dumps(res, indent=4)
-    #print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
+#     res = json.dumps(res, indent=4)
+#     #print(res)
+#     r = make_response(res)
+#     r.headers['Content-Type'] = 'application/json'
+#     return r
 
 
 # processing the request from dialogflow
@@ -63,10 +63,11 @@ def processRequest(req):
     else:
         log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
+
 # geting and sending response to dialogflow
-@app.route('/entainagent', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 @cross_origin()
-def entainagent():
+def webhook():
 
     req = request.get_json(silent=True, force=True)
 
@@ -99,6 +100,7 @@ def processEntainAgentRequest(req):
     if (intent=='services'):
         # api call to send the mail for reset the password
         fulfillmentText="We have sent the relevant details to you via email for reset your password. Do you have further queries?"
+        print("fulfillmentText = " ,fulfillmentText)
         log.write_log(sessionID, "Bot Says: "+fulfillmentText)
         return {
             "fulfillmentText": fulfillmentText
