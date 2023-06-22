@@ -63,6 +63,48 @@ def processRequest(req):
     else:
         log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
+# geting and sending response to dialogflow
+@app.route('/entainagent', methods=['POST'])
+@cross_origin()
+def entainagent():
+
+    req = request.get_json(silent=True, force=True)
+
+    #print("Request:")
+    #print(json.dumps(req, indent=4))
+
+    res = processEntainAgentRequest(req)
+
+    res = json.dumps(res, indent=4)
+    #print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
+# processing the request from dialogflow
+def processEntainAgentRequest(req):
+    log = logger.Log()
+
+    sessionID=req.get('responseId')
+
+
+    result = req.get("queryResult")
+    user_says=result.get("queryText")
+    log.write_log(sessionID, "User Says: "+user_says)
+    parameters = result.get("parameters")
+    service=parameters.get("service")
+    print("service = ",service)
+    email=parameters.get("email")
+    intent = result.get("intent").get('displayName')
+    if (intent=='services'):
+        # api call to send the mail for reset the password
+        fulfillmentText="We have sent the relevant details to you via email for reset your password. Do you have further queries?"
+        log.write_log(sessionID, "Bot Says: "+fulfillmentText)
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+    else:
+        log.write_log(sessionID, "Bot Says: " + result.fulfillmentText)
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
