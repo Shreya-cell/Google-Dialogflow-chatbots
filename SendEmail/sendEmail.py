@@ -15,7 +15,7 @@ class EmailSender:
             self.msg = MIMEMultipart()
 
             # storing the senders email address
-            self.msg['From'] = self.configuration['SENDER_EMAIL']
+            self.msg['From'] = self.configuration['SENDER_EMAIL'].trim()
 
             # storing the receivers email address
             self.msg['To'] = ",".join(recepient_email)
@@ -44,8 +44,8 @@ class EmailSender:
 
             # Authentication
             print("sender email=",self.msg['From'])
-            print("sender password=",self.configuration['PASSWORD'])
-            self.smtp.login(self.msg['From'], self.configuration['PASSWORD'])
+            print("sender password=",self.configuration['PASSWORD'].trim())
+            self.smtp.login(self.msg['From'], self.configuration['PASSWORD'].trim())
 
             # Converts the Multipart msg into a string
             self.text = self.msg.as_string()
