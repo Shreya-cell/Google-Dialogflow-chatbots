@@ -97,9 +97,17 @@ def processEntainAgentRequest(req):
     print("service = ",service)
     email=parameters.get("email")
     intent = result.get("intent").get('displayName')
-    if (intent=='services'):
+    if (intent=='resetPasswordService'):
         # api call to send the mail for reset the password
         fulfillmentText="We have sent the relevant details to you via email for reset your password. Do you have further queries?"
+        print("fulfillmentText = " ,fulfillmentText)
+        log.write_log(sessionID, "Bot Says: "+fulfillmentText)
+        return {
+            "fulfillmentText": fulfillmentText
+        }
+    elif (intent=='bonusDetailService'):
+        # api call to fetch the bonus details
+        fulfillmentText="We have fetched your bonus details. Do you have further queries?"
         print("fulfillmentText = " ,fulfillmentText)
         log.write_log(sessionID, "Bot Says: "+fulfillmentText)
         return {
