@@ -77,7 +77,7 @@ class EmailSender:
                 # body = "This will contain attachment"
 
                 body = body.replace('cust_name',cust_name)
-                body = body.replace('cust_contact', cust_contact)
+                body = body.replace('cust_phone', cust_contact)
                 body = body.replace('cust_email', cust_email)
                 body = body.replace('course_name', course_name)
 
