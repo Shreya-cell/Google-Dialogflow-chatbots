@@ -4,10 +4,11 @@ class TemplateReader:
 
     def read_course_template(self,course_name):
         try:
-            email_message
+            print("course_name = ",course_name)
             if (course_name=='DataScienceMasters'):
                 email_file = open("email_templates/DSM_Template.html", "r")
                 email_message = email_file.read()
+                return email_message
             elif (course_name=='MachineLearningMasters'):
                 email_file = open("email_templates/MLM_Template.html", "r")
                 email_message = email_file.read()
@@ -23,6 +24,6 @@ class TemplateReader:
             elif (course_name == 'Vision'):
                 email_file = open("email_templates/Vision_Template.html", "r")
                 email_message = email_file.read()
-            return email_message
+            # return email_message
         except Exception as e:
             print('The exception is '+str(e))
