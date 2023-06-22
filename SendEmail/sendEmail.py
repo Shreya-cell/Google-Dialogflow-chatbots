@@ -43,6 +43,8 @@ class EmailSender:
             self.smtp.starttls()
 
             # Authentication
+            print("sender email = ",self.msg['From'])
+            print("sender password = ",self.configuration['PASSWORD'])
             self.smtp.login(self.msg['From'], self.configuration['PASSWORD'])
 
             # Converts the Multipart msg into a string
