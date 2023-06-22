@@ -53,8 +53,8 @@ def processRequest(req):
         email_message=template.read_course_template(course_name)
         email_sender.send_email_to_student(cust_email,email_message)
         email_file_support = open("email_templates/support_team_Template.html", "r")
-        email_message_support = email_file_support.read()
-        email_sender.send_email_to_support(cust_name=cust_name,cust_contact=cust_contact,cust_email=cust_email,course_name=course_name,body=email_message_support)
+        # email_message_support = email_file_support.read()
+        # email_sender.send_email_to_support(cust_name=cust_name,cust_contact=cust_contact,cust_email=cust_email,course_name=course_name,body=email_message_support)
         fulfillmentText="We have sent the course syllabus and other relevant details to you via email. An email has been sent to the Support Team with your contact information, you'll be contacted soon. Do you have further queries?"
         log.write_log(sessionID, "Bot Says: "+fulfillmentText)
         return {
