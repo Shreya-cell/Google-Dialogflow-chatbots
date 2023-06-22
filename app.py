@@ -42,7 +42,7 @@ def processRequest(req):
     parameters = result.get("parameters")
     cust_name=parameters.get("cust_name")
     #print(cust_name)
-    cust_contact = parameters.get("cust_contact")
+    cust_contact = parameters.get("cust_phone")
     cust_email=parameters.get("cust_email")
     course_name= parameters.get("course_name")
     intent = result.get("intent").get('displayName')
